@@ -1,28 +1,28 @@
-# require 'rubygems' if RUBY_VERSION < '1.9'
 require 'rest_client'
+require './lib/auth'
+# Username: <SamirG>
+# API Key: <ADA8772865C0CA3C>
+# irb -r ./lib/auth.rb
+a = Auth.new
+b = a.authenticate('SamirG', 'ADA8772865C0CA3C')
+c = b.body
+c = c[10...-2]
 
-# DEFAULT
-# values = '{
-#   "username": "your_username",
-#   "apikey": "5up3r$ecretKey!"
-# }'
-username = "your_username"
-apikey = "5up3r$ecretKey!"
-# CUSTOM VALUES
-username = "\"#{username}\""
-apikey = "\"#{apikey}\""
+# b = a.authenticate('SamirG', 'ADA8772865C0CA3C')
+# b = a.authenticate('Nope', 'Wrong')
+
+
 values = '{
-  "username":'+username+',
-  "apikey": '+apikey+'
+  "recipient": {
+    "name": "Jake McFriend"
+  }
 }'
 
 headers = {
-  :content_type => 'application/json'
+  :content_type => 'application/json',
+  # :authorization => 'Bearer 12345.' + c + '.67890'
+  :authorization => 'Bearer ' + c
 }
-puts values
-response = RestClient.post 'https://coolpay.herokuapp.com/api/login', values, headers
-puts response
 
-# Username: <SamirG>
-# API Key: <ADA8772865C0CA3C>
-# "{\n  \"username\": \"your_username\",\n  \"apikey\": \"5up3r$ecretKey!\"\n}
+response = RestClient.post 'https://coolpay.herokuapp.com/api/recipients', values, headers
+puts response

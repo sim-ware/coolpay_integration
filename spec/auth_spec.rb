@@ -4,10 +4,6 @@ require "auth"
 describe Auth do
   before(:each) do
     @authorizer = Auth.new
-    # @valid_username = "your_username"
-    # @valid_password = "5up3r$ecretKey!"
-    # @invalid_username = "invalid"
-    # @invalid_password = "invalid_and_wrong"
     @valid = ["your_username", "5up3r$ecretKey!"]
     @invalid = ["invalid", "invalid_and_wrong"]
   end
