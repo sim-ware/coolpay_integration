@@ -23,7 +23,6 @@ class RecipientHandler
     }
 
     response = RestClient.post 'https://coolpay.herokuapp.com/api/recipients', values, headers
-    # puts response
     return response
   end
 
