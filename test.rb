@@ -8,10 +8,6 @@ b = a.authenticate('SamirG', 'ADA8772865C0CA3C')
 c = b.body
 c = c[10...-2]
 
-# b = a.authenticate('SamirG', 'ADA8772865C0CA3C')
-# b = a.authenticate('Nope', 'Wrong')
-
-
 values = '{
   "recipient": {
     "name": "Jake McFriend"
@@ -20,7 +16,6 @@ values = '{
 
 headers = {
   :content_type => 'application/json',
-  # :authorization => 'Bearer 12345.' + c + '.67890'
   :authorization => 'Bearer ' + c
 }
 
