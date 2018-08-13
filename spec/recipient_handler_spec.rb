@@ -1,6 +1,7 @@
 require "auth"
 require "recipient_handler"
 
+
 describe RecipientHandler do
   before(:each) do
     @recipientHandler = RecipientHandler.new
