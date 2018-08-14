@@ -7,12 +7,10 @@ class PaymentHandler
   def list_payments()
     a = Auth.new
     b = a.authenticate('SamirG', 'ADA8772865C0CA3C')
-    c = b.body
-    c = c[10...-2]
 
     headers = {
       :content_type => 'application/json',
-      :authorization => 'Bearer ' + c
+      :authorization => 'Bearer ' + b
     }
 
     response = RestClient.get 'https://coolpay.herokuapp.com/api/payments', headers
@@ -28,8 +26,8 @@ class PaymentHandler
   def send_payment(recipient_id, amount, currency)
     a = Auth.new
     b = a.authenticate('SamirG', 'ADA8772865C0CA3C')
-    c = b.body
-    c = c[10...-2]
+    # c = b.body
+    # c = c[10...-2]
 
     recipient_id = "\"#{recipient_id}\""
     currency = "\"#{currency}\""
@@ -45,7 +43,7 @@ class PaymentHandler
 
     headers = {
       :content_type => 'application/json',
-      :authorization => 'Bearer ' + c
+      :authorization => 'Bearer ' + b
     }
 
     begin

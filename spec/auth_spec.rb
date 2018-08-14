@@ -19,7 +19,7 @@ describe Auth do
   describe ".authenticate" do
     context "given Valid Username and/or Password" do
       it "returns a random token" do
-        expect(@authorizer.authenticate(@valid[0], @valid[1]).code).to eql(200)
+        expect(@authorizer.authenticate(@valid[0], @valid[1])).to include("-")
       end
     end
   end

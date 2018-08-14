@@ -7,8 +7,8 @@ class RecipientHandler
   def add_recipient(recipient_name)
     a = Auth.new
     b = a.authenticate('SamirG', 'ADA8772865C0CA3C')
-    c = b.body
-    c = c[10...-2]
+    # c = b.body
+    # c = c[10...-2]
 
     recipient_name = "\"#{recipient_name}\""
 
@@ -20,11 +20,11 @@ class RecipientHandler
 
     headers = {
       :content_type => 'application/json',
-      :authorization => 'Bearer ' + c
+      :authorization => 'Bearer ' + b
     }
 
     response = RestClient.post 'https://coolpay.herokuapp.com/api/recipients', values, headers
-    
+
     return response
   end
 
