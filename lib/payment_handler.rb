@@ -1,5 +1,5 @@
 require "rest_client"
-# require "auth"
+require "auth"
 
 
 class PaymentHandler
@@ -16,6 +16,7 @@ class PaymentHandler
     }
 
     response = RestClient.get 'https://coolpay.herokuapp.com/api/payments', headers
+
     return response
   end
 
@@ -33,6 +34,7 @@ class PaymentHandler
     recipient_id = "\"#{recipient_id}\""
     currency = "\"#{currency}\""
     amount = "\"#{amount}\""
+
     values = '{
       "payment": {
         "amount": '+amount+',
@@ -45,14 +47,12 @@ class PaymentHandler
       :content_type => 'application/json',
       :authorization => 'Bearer ' + c
     }
-    puts values
-    response = RestClient.post 'https://coolpay.herokuapp.com/api/payments', values, headers
 
-    # begin
-    #   response = RestClient.post 'https://coolpay.herokuapp.com/api/payments', values, headers
-    # rescue => e
-    #   e.response
-    # end
+    begin
+      response = RestClient.post 'https://coolpay.herokuapp.com/api/payments', values, headers
+    rescue => e
+      e.response
+    end
 
     return response
   end

@@ -11,6 +11,7 @@ class RecipientHandler
     c = c[10...-2]
 
     recipient_name = "\"#{recipient_name}\""
+
     values = '{
       "recipient": {
         "name": '+recipient_name+'
@@ -23,6 +24,7 @@ class RecipientHandler
     }
 
     response = RestClient.post 'https://coolpay.herokuapp.com/api/recipients', values, headers
+    
     return response
   end
 
