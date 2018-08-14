@@ -1,5 +1,5 @@
 require "rest_client"
-require "auth"
+require_relative "auth"
 require "json"
 
 
@@ -10,7 +10,7 @@ class PaymentHandler
   def list_payments()
     token = AUTHORIZER.authenticate('SamirG', 'ADA8772865C0CA3C')
     headers = AUTHORIZER.add_token_to_header(token)
-    
+
     return RestClient.get URL, headers
   end
 
