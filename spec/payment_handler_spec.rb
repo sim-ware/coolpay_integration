@@ -28,19 +28,11 @@ describe PaymentHandler do
     end
   end
 
-  # describe ".list_successful_payments" do
-  #   context "lists all Successful Payments" do
-  #     it "returns a JSON of all Payments" do
-  #       expect(@paymentHandler.list_payments()).to include("payments")
-  #     end
-  #   end
-  # end
-  #
-  # describe ".list_successful_payments" do
-  #   context "lists all Successful Payments" do
-  #     it "returns a JSON of all Payments" do
-  #       expect(@paymentHandler.list_payments()).to include("payments")
-  #     end
-  #   end
-  # end
+  describe ".list_successful_payments" do
+    context "lists all Successful Payments" do
+      it "returns a JSON of all Payments" do
+        expect(@paymentHandler.list_successful_payments()[0]["status"]).to include("paid")
+      end
+    end
+  end
 end

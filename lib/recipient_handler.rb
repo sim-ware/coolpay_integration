@@ -3,29 +3,21 @@ require "auth"
 
 
 class RecipientHandler
+  URL = 'https://coolpay.herokuapp.com/api/recipients'
+  AUTHORIZER = Auth.new
 
   def add_recipient(recipient_name)
-    a = Auth.new
-    b = a.authenticate('SamirG', 'ADA8772865C0CA3C')
-    # c = b.body
-    # c = c[10...-2]
-
-    recipient_name = "\"#{recipient_name}\""
+    token = AUTHORIZER.authenticate('SamirG', 'ADA8772865C0CA3C')
 
     values = '{
       "recipient": {
-        "name": '+recipient_name+'
+        "name": '+AUTHORIZER.add_double_quotes(recipient_name)+'
       }
     }'
 
-    headers = {
-      :content_type => 'application/json',
-      :authorization => 'Bearer ' + b
-    }
+    headers = AUTHORIZER.add_token_to_header(token)
 
-    response = RestClient.post 'https://coolpay.herokuapp.com/api/recipients', values, headers
-
-    return response
+    return RestClient.post URL, values, headers
   end
 
 end
