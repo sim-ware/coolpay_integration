@@ -1,5 +1,6 @@
 require 'sinatra'
 require './lib/payment_handler'
+require './lib/auth'
 
 
 get '/' do
@@ -7,17 +8,25 @@ get '/' do
 end
 
 post '/home' do
-  erb :home, :locals => {:username => params[:username], :apikey => params[:apikey]}
+  @auth = Auth.new
+  @auth.authenticate(params[:username], params[:apikey])
+  # if @auth.authorized
+  puts Auth.authorized
+  if Auth.authorized
+    erb :home, :locals => {:username => params[:username], :apikey => params[:apikey]}
+  else
+    erb :fail
+  end
 end
 
 get '/payments/show' do
   paymentHandler = PaymentHandler.new
-  @ans = paymentHandler.list_successful_payments
+  @ans = paymentHandler.list_successful_payments(@auth)
   erb :payments
 end
 
 get '/recipients/add' do
-  erb :recipients
+  erb :create_recipient
 end
 
 post '/recipients/add' do
