@@ -1,5 +1,3 @@
-
-
 class Utils
 
   def add_token_to_header(token)

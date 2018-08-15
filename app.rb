@@ -22,6 +22,7 @@ end
 
 post '/recipients/add' do
   "Recipient " + params[:recipientname] + " Added!"
+  # erb :confirm_recipient, :locals => {:recipientname => params[:username]}
 end
 
 get '/payments/add' do
@@ -30,4 +31,5 @@ end
 
 post '/payments/add' do
   "Payment Created!" + params[:amount] + ", " + params[:currency] + ", " + params[:recipientid] + "."
+  # erb :confirm_payment, :locals => {:amount => params[:amount], :currency => params[:currency], :recipientid => params[:recipientid]}
 end
