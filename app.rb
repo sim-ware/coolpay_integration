@@ -8,10 +8,8 @@ get '/' do
 end
 
 post '/home' do
-  @auth = Auth.new
-  @auth.authenticate(params[:username], params[:apikey])
-  # if @auth.authorized
-  puts Auth.authorized
+  @@auth = Auth.new
+  @@auth.authenticate(params[:username], params[:apikey])
   if Auth.authorized
     erb :home, :locals => {:username => params[:username], :apikey => params[:apikey]}
   else
@@ -21,7 +19,7 @@ end
 
 get '/payments/show' do
   paymentHandler = PaymentHandler.new
-  @ans = paymentHandler.list_successful_payments(@auth)
+  @ans = paymentHandler.list_successful_payments(@@auth)
   erb :payments
 end
 
