@@ -1,20 +1,22 @@
 require "rest_client"
-require "auth"
+require_relative "auth"
+require_relative "utils"
 
 
 class RecipientHandler
   URL = 'https://coolpay.herokuapp.com/api/recipients'
+  UTILS = Utils.new
 
-  def add_recipient(recipient_name, auth)
+  def add_recipient(auth, recipient_name)
     token = auth.refresh_token
 
     values = '{
       "recipient": {
-        "name": '+auth.add_double_quotes(recipient_name)+'
+        "name": '+UTILS.add_double_quotes(recipient_name)+'
       }
     }'
 
-    headers = auth.add_token_to_header(token)
+    headers = UTILS.add_token_to_header(token)
 
     return RestClient.post URL, values, headers
   end

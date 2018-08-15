@@ -22,14 +22,6 @@ describe PaymentHandler do
     end
   end
 
-  # describe ".list_payments" do
-  #   context "lists all Payments" do
-  #     it "returns a JSON of all Payments" do
-  #       expect(@paymentHandler.list_payments()).to include("payments")
-  #     end
-  #   end
-  # end
-
   describe ".list_successful_payments" do
     context "lists all Successful Payments" do
       it "returns a JSON of all Payments" do

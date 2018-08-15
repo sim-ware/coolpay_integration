@@ -1,16 +1,18 @@
 require "rest_client"
+require "utils"
 
 
 class Auth
   URL = 'https://coolpay.herokuapp.com/api/login'
   TOKEN = ''
   DETAILS = []
+  UTILS = Utils.new
   @@authorized = false
 
   def authenticate(username, password)
     values = '{
-      "username":'+add_double_quotes(username)+',
-      "apikey": '+add_double_quotes(password)+'
+      "username":'+UTILS.add_double_quotes(username)+',
+      "apikey": '+UTILS.add_double_quotes(password)+'
     }'
 
     headers = {
@@ -32,15 +34,15 @@ class Auth
 
   def refresh_token()
     values = '{
-      "username":'+add_double_quotes(DETAILS[0])+',
-      "apikey": '+add_double_quotes(DETAILS[1])+'
+      "username":'+UTILS.add_double_quotes(DETAILS[0])+',
+      "apikey": '+UTILS.add_double_quotes(DETAILS[1])+'
     }'
 
     headers = {
       :content_type => 'application/json'
     }
 
-    return return_token(RestClient.post URL, values, headers)
+    return UTILS.return_token(RestClient.post URL, values, headers)
   end
 
   def self.authorized
@@ -51,22 +53,22 @@ class Auth
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-  def add_token_to_header(token)
-    headers = {
-      :content_type => 'application/json',
-      :authorization => 'Bearer ' + token
-    }
-    return headers
-  end
-
-
-  def add_double_quotes(string)
-    return "\"#{string}\""
-  end
-
-
-  def return_token(response)
-    return response.body[10...-2]
-  end
+  # def add_token_to_header(token)
+  #   headers = {
+  #     :content_type => 'application/json',
+  #     :authorization => 'Bearer ' + token
+  #   }
+  #   return headers
+  # end
+  #
+  #
+  # def add_double_quotes(string)
+  #   return "\"#{string}\""
+  # end
+  #
+  #
+  # def return_token(response)
+  #   return response.body[10...-2]
+  # end
 
 end
