@@ -25,7 +25,7 @@ Here, each requirement/task is written, and below the CoolPay API function I tho
 
 ![Drag Racing](wireframe.jpg)
 
-In terms of architecture, the back-end is made up of 4 classes. Auth accepts usernames and apikeys, and authenticates users. The PaymentHandler deals with any requests made to the CoolPay API regarding payments, and the RecipientHandler does the same with recipients. Utils contains a set of methods that were useful in either formatting information to be sent as a request, or for extracting necessary information from responses. Because they were used in most classes, but were still generic, I felt the name utils suitable in this instance. 
+In terms of architecture, the back-end is made up of 4 classes. Auth accepts usernames and apikeys, and authenticates users. The PaymentHandler deals with any requests made to the CoolPay API regarding payments, and the RecipientHandler does the same with recipients. Utils contains a set of methods that were useful in either formatting information to be sent as a request, or for extracting necessary information from responses. Because they were used in most classes, but were still generic, I felt the name utils suitable in this instance.
 
 ## Techs Used
 ##### sinatra
@@ -44,3 +44,4 @@ I used just HTML for the front-end. It was the simplest way to display the respo
 - Also, when testing, I couldn't find a way to check whether a string was wrapped in double-quotes or not, which is something I would improve to make the codebase more secure.
 - I think because I haven't used Ruby in a while, some of the conventions around my code might be incorrect, or borrowed from other languages. To mind, when I wanted to create variables that could be used across methods within a class, I wasn't sure whether to use constants, class variables, or class attributes. In the short term, I used what I felt worked, but I think a better solution would be figure out which of the three is best for the situation.
 - In terms of returning payments to see if they were successful, at the moment the app returns all payments with a status of 'paid', and expects the user to look through the data for the entry they require. I think a better long term solution might have been to make the user able to filter the payments returned by either payment_id or recipient information.  
+- Some of the tests written involve actually creating objects into CoolPay API's DB. Long term this is hugely inefficient - I should have mocked the instances where CoolPay was used in testing to avoid this.
