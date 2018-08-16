@@ -2,6 +2,13 @@
 Integrating the CoolPay API with FakeBook
 You can find Coolpay documentation here: http://docs.coolpayapi.apiary.io/.
 
+## How to Run
+- Clone this repository, and install the necessary dependencies outlined the Gemfile.
+- Once done, cd into the repo and run the following command to run all tests: ```$ rspec```
+- To run the server, run the command: ```$ ruby app.rb```
+- Once authenticated, the user has the option to add either a recipient or payment, or check successful payments.
+
+
 ## Task
 Write a small app that uses Coolplay API in Ruby. The app should be able do the following:
 - Authenticate to Coolpay API
@@ -17,6 +24,8 @@ To begin with, I made each of the four above requirements into tasks to be tackl
 Here, each requirement/task is written, and below the CoolPay API function I thought most suitable. After completing the back-end code, I wanted to show the results in the browser, so that it could be a complete 'app'. I used the below wireframing sketch to help guide my front-end development. The 'comic-book' approach to designing the HTML page structure helped me plan my code more easily.
 
 ![Drag Racing](wireframe.jpg)
+
+In terms of architecture, the back-end is made up of 4 classes. Auth accepts usernames and apikeys, and authenticates users. The PaymentHandler deals with any requests made to the CoolPay API regarding payments, and the RecipientHandler does the same with recipients. Utils contains a set of methods that were useful in either formatting information to be sent as a request, or for extracting necessary information from responses. Because they were used in most classes, but were still generic, I felt the name utils suitable in this instance. 
 
 ## Techs Used
 ##### sinatra
